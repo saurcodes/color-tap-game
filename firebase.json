@@ -1,0 +1,55 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "color-tap-game-sk2026",
+          "appId": "1:257686648189:android:ffcbf5b3fa52b9281f8814",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "color-tap-game-sk2026",
+          "appId": "1:257686648189:ios:b2c05d98b89a60581f8814",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "macos": {
+        "default": {
+          "projectId": "color-tap-game-sk2026",
+          "appId": "1:257686648189:ios:b2c05d98b89a60581f8814",
+          "uploadDebugSymbols": false,
+          "fileOutput": "macos/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "color-tap-game-sk2026",
+          "configurations": {
+            "android": "1:257686648189:android:ffcbf5b3fa52b9281f8814",
+            "ios": "1:257686648189:ios:b2c05d98b89a60581f8814",
+            "macos": "1:257686648189:ios:b2c05d98b89a60581f8814",
+            "web": "1:257686648189:web:2f77c8d2e3dcf6b41f8814",
+            "windows": "1:257686648189:web:d048a2d4809909351f8814"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

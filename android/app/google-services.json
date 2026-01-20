@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "257686648189",
+    "project_id": "color-tap-game-sk2026",
+    "storage_bucket": "color-tap-game-sk2026.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257686648189:android:ffcbf5b3fa52b9281f8814",
+        "android_client_info": {
+          "package_name": "com.example.color_tap_game"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDa9-PUzaW8oae-Iba3I_aUEOAlRIwZM6Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
