@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../services/auth_service.dart';
+import 'game_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -222,6 +223,11 @@ class _LoginScreenState extends State<LoginScreen>
                       _buildErrorMessage(),
                     ],
 
+                    const SizedBox(height: 20),
+
+                    // Test Mode Button
+                    _buildTestModeButton(),
+
                     const SizedBox(height: 40),
 
                     // Footer
@@ -362,6 +368,24 @@ class _LoginScreenState extends State<LoginScreen>
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildTestModeButton() {
+    return TextButton(
+      onPressed: () {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const GameScreen()),
+        );
+      },
+      child: Text(
+        'Skip to Game (Test Mode)',
+        style: GoogleFonts.poppins(
+          fontSize: 14,
+          color: const Color(0xFFFFBE0B),
+          fontWeight: FontWeight.w500,
+        ),
       ),
     );
   }
