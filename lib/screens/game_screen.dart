@@ -160,11 +160,22 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
 
         // Bonus points for combo
         final comboBonus = (combo ~/ 5) * 5;
+        final oldScore = score;
         score += 10 + comboBonus;
 
-        if (score % 50 == 0 && score > 0) {
-          level++;
+        // Check if we crossed a level threshold (every 50 points)
+        final oldLevel = (oldScore / 50).floor() + 1;
+        final newLevel = (score / 50).floor() + 1;
+
+        if (newLevel > level) {
+          level = newLevel;
           targetColor = availableColors[_random.nextInt(availableColors.length)];
+
+          // Reset timer for new level
+          timeRemaining = 60;
+
+          // Show level complete celebration
+          _showLevelCompleteDialog(oldLevel);
         }
       });
     } else {
@@ -203,6 +214,108 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
     if (mounted) {
       _showGameOverDialog();
     }
+  }
+
+  void _showLevelCompleteDialog(int completedLevel) {
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: false,
+      barrierColor: Colors.black54,
+      transitionDuration: const Duration(milliseconds: 300),
+      pageBuilder: (context, anim1, anim2) {
+        return ScaleTransition(
+          scale: CurvedAnimation(parent: anim1, curve: Curves.elasticOut),
+          child: AlertDialog(
+            backgroundColor: const Color(0xFF1D1E33),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(24),
+            ),
+            content: Container(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Trophy icon
+                  Container(
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      gradient: const LinearGradient(
+                        colors: [Color(0xFFFFBE0B), Color(0xFFFF6584)],
+                      ),
+                    ),
+                    child: const Icon(
+                      Icons.star_rounded,
+                      size: 50,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Text(
+                    'LEVEL $completedLevel',
+                    style: GoogleFonts.poppins(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white60,
+                      letterSpacing: 2,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'COMPLETE!',
+                    style: GoogleFonts.poppins(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Level $level Unlocked',
+                    style: GoogleFonts.poppins(
+                      fontSize: 16,
+                      color: const Color(0xFFFFBE0B),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Timer Reset: 60s',
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      color: const Color(0xFF00D9FF),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF6C63FF),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 40, vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: Text(
+                      'Continue',
+                      style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 
   void _showGameOverDialog() {
